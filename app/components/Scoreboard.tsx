@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Logo from "../assets/images/logo-bonus.svg";
+import { useContext } from "react";
+import AppContext from "./context/context";
 
 const Scoreboard = () => {
+  const { state } = useContext(AppContext);
   return (
     <section className="pt-8 md:pt-[2.9rem] px-8 z-50">
       <header
@@ -17,13 +20,13 @@ const Scoreboard = () => {
           className="h-[57px] w-[57px] md:h-[117px] md:w-[117px] pl-1 pt-1"
         />
         <div
-          className="flex w-fit px-5 h-[4.5rem] flex-col items-center justify-center rounded-lg bg-white py-3 
-              md:h-[113px] md:min-w-[150px]">
+          className="flex w-20 h-[4.5rem] flex-col items-center justify-center rounded-lg bg-white py-3 
+              md:h-[113px] md:w-[150px]">
           <p className="text-sm tracking-widest text-scoreText md:text-base">
             SCORE
           </p>
           <p className="text-[3rem] leading-none -mt-1 font-bold tracking-widest text-darkText md:text-6xl">
-            0
+            {state.score}
           </p>
         </div>
       </header>
