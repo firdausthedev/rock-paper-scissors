@@ -6,9 +6,20 @@ import paper from "../../assets/images/icon-paper.svg";
 import rock from "../../assets/images/icon-rock.svg";
 import scissors from "../../assets/images/icon-scissors.svg";
 import spock from "../../assets/images/icon-spock.svg";
-import { choices } from "../context/types";
+import { GameActionType, choices } from "../context/types";
+import { useContext } from "react";
+import AppContext from "../context/context";
 
 const GameButton = ({ type }: { type: choices }) => {
+  const { dispatch } = useContext(AppContext);
+
+  const handleButtonClick = (type: choices) => {
+    dispatch({
+      type: GameActionType.SET_BATTLE,
+      payload: { battle: true, userChoice: type },
+    });
+  };
+
   const imageSelector = (type: choices) => {
     switch (type) {
       case choices.scissors:
@@ -50,6 +61,7 @@ const GameButton = ({ type }: { type: choices }) => {
     <button
       aria-label={`button ${type}`}
       type="button"
+      onClick={() => handleButtonClick(type)}
       className={`${baseButtonStyle} ${styleSelector(type)}`}>
       <div className="h-full w-full rounded-full shadow-md">
         <div

@@ -7,6 +7,11 @@ import { GameActionTypes, GameState } from "./types";
 const initialState: GameState = {
   ruleModalOpen: false,
   score: 0,
+  userChoice: null,
+  houseChoice: null,
+  loading: true,
+  battle: false,
+  lastWinner: null,
 };
 
 const AppContext = createContext<{

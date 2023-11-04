@@ -26,6 +26,14 @@ const config: Config = {
           "radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%))",
         pentangonBg: "url('/bg-pentagon.svg')",
       },
+      boxShadow: {
+        outerRing: "inset 0px -8px 0px 0px rgba(0,0,0,0.2)",
+        innerRing: "inset 0px 12px 0px -6px rgba(133,133,133,0.3)",
+        winnerRingMobile:
+          "rgba(0, 0, 0, 0.2) 0px -8px 0px 0px inset, rgba(44, 59, 89, 0.5) 0px 0px 0px 1rem, rgba(38, 53, 84, 0.5) 0px 0px 0px 3rem, rgba(33, 48, 79, 0.5) 0px 0px 0px 5rem",
+        winnerRing:
+          "rgba(0, 0, 0, 0.2) 0px -14px 0px 0px inset, rgba(44, 59, 89, 0.2) 0px 0px 0px 4rem, rgba(38, 53, 84, 0.3) 0px 0px 0px 8rem, rgba(33, 48, 79, 0.3) 0px 0px 0px 12rem",
+      },
     },
   },
   plugins: [],
