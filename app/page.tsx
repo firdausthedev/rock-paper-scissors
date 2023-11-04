@@ -6,7 +6,7 @@ import { AppProvider } from "./components/context/context";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradientBg relative flex flex-col">
+    <main className="min-h-screen bg-gradientBg relative flex flex-col overflow-hidden">
       <AppProvider>
         <Scoreboard />
         <GameView />

@@ -12,8 +12,7 @@
   "rules": {
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
-    "@typescript-eslint/no-empty-function": 0,
-    "@next/next/no-img-element": "off"
+    "@typescript-eslint/no-empty-function": 0
   },
   "plugins": [
     "@typescript-eslint",

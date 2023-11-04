@@ -9,6 +9,7 @@ import AppContext from "../context/context";
 import { useContext, useEffect } from "react";
 import { GameActionType, choices, player } from "../context/types";
 import { setHouseChoices, evalGame, getHouseChoice } from "../context/actions";
+import { AnimatePresence, motion } from "framer-motion";
 
 const GameBattle = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -54,6 +55,7 @@ const GameBattle = () => {
   const startGame = () => {
     const filteredChoices: choices[] = setHouseChoices(state.userChoice!);
     const housePick: choices = getHouseChoice(filteredChoices);
+
     dispatch({
       type: GameActionType.SET_HOUSE_CHOICE,
       payload: housePick,
@@ -62,6 +64,10 @@ const GameBattle = () => {
     const isWinner = evalGame(state.userChoice!, housePick);
 
     if (isWinner) {
+      dispatch({
+        type: GameActionType.SET_LAST_WINNER,
+        payload: player.user,
+      });
       setTimeout(() => {
         dispatch({
           type: GameActionType.SET_LOADING,
@@ -71,13 +77,12 @@ const GameBattle = () => {
           type: GameActionType.SET_SCORE,
           payload: state.score + 1,
         });
-      }, 700);
-
+      }, 1500);
+    } else {
       dispatch({
         type: GameActionType.SET_LAST_WINNER,
-        payload: player.user,
+        payload: player.house,
       });
-    } else {
       setTimeout(() => {
         dispatch({
           type: GameActionType.SET_LOADING,
@@ -87,11 +92,7 @@ const GameBattle = () => {
           type: GameActionType.SET_SCORE,
           payload: state.score - 1,
         });
-      }, 700);
-      dispatch({
-        type: GameActionType.SET_LAST_WINNER,
-        payload: player.house,
-      });
+      }, 1500);
     }
   };
 
@@ -108,12 +109,16 @@ const GameBattle = () => {
       type: GameActionType.SET_BATTLE,
       payload: { battle: false, userChoice: null },
     });
+    dispatch({
+      type: GameActionType.SET_HOUSE_CHOICE,
+      payload: null,
+    });
   };
 
   useEffect(() => {
     setTimeout(() => {
       startGame();
-    }, 1000);
+    }, 2500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -154,20 +159,27 @@ const GameBattle = () => {
           </button>
         </div>
       </div>
-      {!state.loading && (
-        <div className="z-50 mx-auto flex basis-full flex-col items-center md:m-0 md:basis-auto md:order-2 order-3">
-          <h2 className="uppercase text-6xl tracking-wide text-white">
-            {state.lastWinner && state.lastWinner === player.user
-              ? "You Win"
-              : "You Lose"}
-          </h2>
-          <button
-            onClick={() => handlePlayAgain()}
-            className="uppercase mt-6 rounded-xl bg-white px-16 py-3 text-xl tracking-widest text-darkText duration-150 transition-colors hover:bg-transparent hover:text-white border-white border">
-            Play Again
-          </button>
-        </div>
-      )}
+      <AnimatePresence>
+        {!state.loading && (
+          <motion.div
+            key="result-view"
+            initial={{ y: "100vh" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5, type: "tween", ease: "easeInOut" }}
+            className="z-50 mx-auto flex basis-full flex-col items-center md:m-0 md:basis-auto md:order-2 order-3">
+            <h2 className="uppercase text-6xl tracking-wide text-white">
+              {state.lastWinner && state.lastWinner === player.user
+                ? "You Win"
+                : "You Lose"}
+            </h2>
+            <button
+              onClick={() => handlePlayAgain()}
+              className="uppercase mt-6 rounded-xl bg-white px-16 py-3 text-xl tracking-widest text-darkText duration-150 transition-colors hover:bg-transparent hover:text-white border-white border">
+              Play Again
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div
         className={`flex flex-col justify-center items-center gap-12 order-2 md:order-3 ${
@@ -176,39 +188,60 @@ const GameBattle = () => {
         <h2 className="uppercase relative tracking-widest text-white md:text-2xl order-2 md:order-1 z-40">
           The House Picked
         </h2>
-        {state.lastWinner ? (
-          <div className="md:h-[400px] h-24 order-1 md:order-2">
-            <button
-              aria-label={`button ${state.houseChoice!}`}
-              type="button"
-              className={`${baseButtonStyle} ${styleSelector(
-                state.houseChoice!,
-              )} ${
-                !state.loading &&
-                state.lastWinner === player.house &&
-                "shadow-winnerRingMobile md:shadow-winnerRing "
-              }`}>
-              <div className="h-full w-full rounded-full shadow-md">
-                <div
-                  className="
+        <AnimatePresence>
+          {state.lastWinner ? (
+            <motion.div
+              key="house-pick"
+              initial={{ rotateY: 90 }}
+              animate={{ rotateY: 0 }}
+              transition={{
+                duration: 1,
+                type: "tween",
+                ease: "easeInOut",
+              }}
+              className="md:h-[400px] h-24 order-1 md:order-2">
+              <button
+                aria-label={`button ${state.houseChoice!}`}
+                type="button"
+                className={`${baseButtonStyle} ${styleSelector(
+                  state.houseChoice!,
+                )} ${
+                  !state.loading &&
+                  state.lastWinner === player.house &&
+                  "shadow-winnerRingMobile md:shadow-winnerRing "
+                }`}>
+                <div className="h-full w-full rounded-full shadow-md">
+                  <div
+                    className="
           shadow-innerRing flex h-full w-full 
           items-center justify-center rounded-full bg-gray-200">
-                  <Image
-                    width={0}
-                    height={0}
-                    src={imageSelector(state.houseChoice!)}
-                    alt={`icon ${state.houseChoice!}`}
-                    className="w-1/2 select-none"
-                  />
+                    <Image
+                      width={0}
+                      height={0}
+                      src={imageSelector(state.houseChoice!)}
+                      alt={`icon ${state.houseChoice!}`}
+                      className="w-1/2 select-none"
+                    />
+                  </div>
                 </div>
-              </div>
-            </button>
-          </div>
-        ) : (
-          <div className="md:h-[400px] h-24 order-1 md:order-2 flex justify-center items-center md:items-start">
-            <div className="md:h-[220px] md:w-[220px] flex w-24 h-24 rounded-full mt-5 bg-darkText/70 z-50 animate-pulse"></div>
-          </div>
-        )}
+              </button>
+            </motion.div>
+          ) : (
+            <div className="md:h-[400px] h-24 order-1 md:order-2 flex justify-center items-center md:items-start">
+              <motion.div
+                animate={{
+                  scale: [0.6, 1.2, 0.6, 1.2, 1],
+                }}
+                transition={{
+                  duration: 2.5,
+                  type: "tween",
+                  ease: "easeInOut",
+                }}>
+                <div className="md:h-[220px] md:w-[220px] flex w-24 h-24 rounded-full mt-5 bg-darkText/70 z-50"></div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

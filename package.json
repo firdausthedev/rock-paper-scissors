@@ -11,9 +11,10 @@
     "prettier": "prettier \"app/**/*.{ts,tsx,js,jsx,css}\" --write"
   },
   "dependencies": {
+    "framer-motion": "^10.16.4",
+    "next": "14.0.1",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.1"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.0",

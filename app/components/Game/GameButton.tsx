@@ -63,19 +63,17 @@ const GameButton = ({ type }: { type: choices }) => {
       type="button"
       onClick={() => handleButtonClick(type)}
       className={`${baseButtonStyle} ${styleSelector(type)}`}>
-      <div className="h-full w-full rounded-full shadow-md">
-        <div
-          className="
+      <div
+        className="
           shadow-innerRing flex h-full w-full 
           items-center justify-center rounded-full bg-gray-200">
-          <Image
-            width={0}
-            height={0}
-            src={imageSelector(type)}
-            alt={`icon ${type}`}
-            className="w-1/2 select-none"
-          />
-        </div>
+        <Image
+          width={0}
+          height={0}
+          src={imageSelector(type)}
+          alt={`icon ${type}`}
+          className="w-1/2 select-none "
+        />
       </div>
     </button>
   );
