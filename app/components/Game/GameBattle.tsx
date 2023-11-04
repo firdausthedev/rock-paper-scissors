@@ -123,43 +123,43 @@ const GameBattle = () => {
   }, []);
 
   return (
-    <div className=" mx-auto mt-20 flex justify-center items-center gap-5 md:gap-20 flex-wrap md:flex-nowrap">
-      <div
-        className={`flex flex-col justify-center items-center gap-12 order-1  ${
-          state.lastWinner === player.user ? "z-30" : "z-40"
-        }`}>
-        <h2 className="uppercase relative tracking-widest text-white md:text-2xl order-2 md:order-1 z-40">
-          You Picked
-        </h2>
-        <div className="md:h-[400px] h-24 order-1 md:order-2">
-          <button
-            aria-label={`button ${state.userChoice!}`}
-            type="button"
-            className={`${baseButtonStyle} ${styleSelector(
-              state.userChoice!,
-            )} ${
-              !state.loading &&
-              state.lastWinner === player.user &&
-              "shadow-winnerRingMobile md:shadow-winnerRing"
-            } `}>
-            <div className="h-full w-full rounded-full shadow-md">
-              <div
-                className="
+    <AnimatePresence>
+      <div className=" mx-auto mt-20 flex justify-center items-center gap-5 md:gap-20 flex-wrap md:flex-nowrap">
+        <div
+          className={`flex flex-col justify-center items-center gap-12 order-1  ${
+            state.lastWinner === player.user ? "z-30" : "z-40"
+          }`}>
+          <h2 className="uppercase relative tracking-widest text-white md:text-2xl order-2 md:order-1 z-40">
+            You Picked
+          </h2>
+          <div className="md:h-[400px] h-24 order-1 md:order-2">
+            <button
+              aria-label={`button ${state.userChoice!}`}
+              type="button"
+              className={`${baseButtonStyle} ${styleSelector(
+                state.userChoice!,
+              )} ${
+                !state.loading &&
+                state.lastWinner === player.user &&
+                "shadow-winnerRingMobile md:shadow-winnerRing"
+              } `}>
+              <div className="h-full w-full rounded-full shadow-md">
+                <div
+                  className="
           shadow-innerRing flex h-full w-full 
           items-center justify-center rounded-full bg-gray-200">
-                <Image
-                  width={0}
-                  height={0}
-                  src={imageSelector(state.userChoice!)}
-                  alt={`icon ${choices.rock}`}
-                  className="w-1/2 select-none"
-                />
+                  <Image
+                    width={0}
+                    height={0}
+                    src={imageSelector(state.userChoice!)}
+                    alt={`icon ${choices.rock}`}
+                    className="w-1/2 select-none"
+                  />
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </div>
         </div>
-      </div>
-      <AnimatePresence>
         {!state.loading && (
           <motion.div
             key="result-view"
@@ -179,22 +179,21 @@ const GameBattle = () => {
             </button>
           </motion.div>
         )}
-      </AnimatePresence>
 
-      <div
-        className={`flex flex-col justify-center items-center gap-12 order-2 md:order-3 ${
-          state.lastWinner === player.house ? "z-30" : "z-40"
-        }`}>
-        <h2 className="uppercase relative tracking-widest text-white md:text-2xl order-2 md:order-1 z-40">
-          The House Picked
-        </h2>
-        <AnimatePresence>
+        <div
+          className={`flex flex-col justify-center items-center gap-12 order-2 md:order-3 ${
+            state.lastWinner === player.house ? "z-30" : "z-40"
+          }`}>
+          <h2 className="uppercase relative tracking-widest text-white md:text-2xl order-2 md:order-1 z-40">
+            The House Picked
+          </h2>
           {state.lastWinner ? (
             <motion.div
               key="house-pick"
               initial={{ rotateY: 90 }}
               animate={{ rotateY: 0 }}
               transition={{
+                delay: 0.5,
                 duration: 1,
                 type: "tween",
                 ease: "easeInOut",
@@ -241,9 +240,9 @@ const GameBattle = () => {
               </motion.div>
             </div>
           )}
-        </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 };
 

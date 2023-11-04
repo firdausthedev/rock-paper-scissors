@@ -30,8 +30,8 @@ const RuleModal = () => {
             exit={{ y: "100vh" }}
             transition={{ duration: 0.5, type: "tween", ease: "easeInOut" }}
             className="bg-white flex flex-col rounded-xl w-full h-full md:w-fit md:h-auto md:p-11 
-                    justify-center items-center md:items-start relative overflow-y-auto py-10">
-            <div className="flex w-full justify-center md:justify-between relative">
+                    justify-center items-center md:items-start relative overflow-y-auto py-10 gap-10 ">
+            <div className="flex w-full justify-center md:justify-between relative ">
               <h2 className="text-4xl font-bold text-darkText ">RULES</h2>
               <button
                 type="button"
@@ -41,14 +41,7 @@ const RuleModal = () => {
                 <Image width={0} height={0} src={closeIcon} alt="Close" />
               </button>
             </div>
-
-            <Image
-              width={0}
-              height={0}
-              src={ruleSheet}
-              alt="Rules"
-              className="my-32 md:my-10"
-            />
+            <Image width={0} height={0} src={ruleSheet} alt="Rules" />
             <button
               type="button"
               className="block md:hidden"

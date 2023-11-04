@@ -6,7 +6,7 @@ import { AppProvider } from "./components/context/context";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradientBg relative flex flex-col overflow-hidden">
+    <main className="min-h-screen bg-gradientBg relative flex flex-col overflow-hidden py-8 md:py-[2.9rem] px-8">
       <AppProvider>
         <Scoreboard />
         <GameView />

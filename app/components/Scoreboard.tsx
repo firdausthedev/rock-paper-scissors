@@ -8,7 +8,7 @@ import AppContext from "./context/context";
 const Scoreboard = () => {
   const { state } = useContext(AppContext);
   return (
-    <section className="pt-8 md:pt-[2.9rem] px-8 z-50">
+    <section className=" z-50">
       <header
         className="mx-auto max-w-[701px] flex items-center justify-between rounded-lg md:rounded-[1rem] border-2
           border-headerOutline p-3 pl-4 md:px-6 md:pb-[0.8rem] md:pt-[0.9rem]">
@@ -25,7 +25,7 @@ const Scoreboard = () => {
           <p className="text-sm tracking-widest text-scoreText md:text-base">
             SCORE
           </p>
-          <p className="text-[3rem] leading-none -mt-1 font-bold tracking-widest text-darkText md:text-6xl">
+          <p className="text-2xl font-bold tracking-widest text-darkText md:text-6xl">
             {state.score}
           </p>
         </div>
