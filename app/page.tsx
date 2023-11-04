@@ -1,3 +1,4 @@
+import GameView from "./components/Game/GameView";
 import RuleButton from "./components/Rule/RuleButton";
 import RuleModal from "./components/Rule/RuleModal";
 import Scoreboard from "./components/Scoreboard";
@@ -8,6 +9,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradientBg relative flex flex-col">
       <AppProvider>
         <Scoreboard />
+        <GameView />
         <RuleButton />
         <RuleModal />
       </AppProvider>

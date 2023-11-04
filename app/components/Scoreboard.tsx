@@ -20,8 +20,8 @@ const Scoreboard = () => {
           className="h-[57px] w-[57px] md:h-[117px] md:w-[117px] pl-1 pt-1"
         />
         <div
-          className="flex w-20 h-[4.5rem] flex-col items-center justify-center rounded-lg bg-white py-3 
-              md:h-[113px] md:w-[150px]">
+          className="flex w-fit px-5 h-[4.5rem] flex-col items-center justify-center rounded-lg bg-white py-3 
+              md:h-[113px] md:min-w-[150px]">
           <p className="text-sm tracking-widest text-scoreText md:text-base">
             SCORE
           </p>
