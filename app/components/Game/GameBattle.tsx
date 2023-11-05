@@ -106,12 +106,12 @@ const GameBattle = () => {
       payload: null,
     });
     dispatch({
-      type: GameActionType.SET_BATTLE,
-      payload: { battle: false, userChoice: null },
-    });
-    dispatch({
       type: GameActionType.SET_HOUSE_CHOICE,
       payload: null,
+    });
+    dispatch({
+      type: GameActionType.SET_BATTLE,
+      payload: { battle: false, userChoice: state.userChoice },
     });
   };
 

@@ -2,6 +2,7 @@ import GameView from "./components/Game/GameView";
 import RuleButton from "./components/Rule/RuleButton";
 import RuleModal from "./components/Rule/RuleModal";
 import Scoreboard from "./components/Scoreboard";
+import WinConfetti from "./components/WinConfetti";
 import { AppProvider } from "./components/context/context";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <AppProvider>
         <Scoreboard />
         <GameView />
+        <WinConfetti />
         <RuleButton />
         <RuleModal />
       </AppProvider>
